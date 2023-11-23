@@ -33,4 +33,19 @@
 .textContainer {
   text-align: left;
   margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 280px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:visited,
+a:focus,
+a:active {
+  color: inherit;
 }

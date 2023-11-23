@@ -1,6 +1,16 @@
-import { Card, Image, Text, Group, Badge, Center, Button } from "@mantine/core";
+import {
+  Card,
+  Image,
+  Text,
+  Group,
+  Badge,
+  Center,
+  Button,
+  Rating,
+} from "@mantine/core";
 import classes from "./HomeScreen.module.css";
 import products from "../../products";
+import { Link } from "react-router-dom/dist";
 
 const ProductCard = ({ product }) => {
   return (
@@ -11,13 +21,20 @@ const ProductCard = ({ product }) => {
 
       <Group justify="space-between" mt="md">
         <div>
-          <p className={classes.textContainer}>{product.name}</p>
+          <p className={classes.textContainer}>
+            <Link to={`/product/${product._id}`}>{product.name}</Link>
+          </p>
         </div>
       </Group>
 
       <Card.Section className={classes.section}>
         <Group gap={30}>
           <div>
+            <Rating
+              defaultValue={product.rating}
+              fractions={2}
+              style={{ marginBottom: 4 }}
+            />
             <Text fz="xl" fw={700} style={{ lineHeight: 1 }}>
               {`$${product.price}`}
             </Text>
