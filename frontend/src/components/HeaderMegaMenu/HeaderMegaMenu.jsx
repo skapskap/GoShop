@@ -29,6 +29,7 @@ import {
 } from "@tabler/icons-react";
 import classes from "./HeaderMegaMenu.module.css";
 import { Link } from "react-router-dom/dist";
+import { IconShoppingCart } from "@tabler/icons-react";
 
 const mockdata = [
   {
@@ -91,13 +92,15 @@ export function HeaderMegaMenu() {
   ));
 
   return (
-    <Box pb={120}>
+    <Box pb={20}>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
-          <strong>GoShop</strong>
+          <strong>
+            <Link to="/">GoShop</Link>
+          </strong>
           <Group h="100%" gap={0} visibleFrom="sm">
             <Link to="#" className={classes.link}>
-              Home
+              Início
             </Link>
             <HoverCard
               width={600}
@@ -110,7 +113,7 @@ export function HeaderMegaMenu() {
                 <Link to="/" className={classes.link}>
                   <Center inline>
                     <Box component="span" mr={5}>
-                      Features
+                      Categorias
                     </Box>
                     <IconChevronDown
                       style={{ width: rem(16), height: rem(16) }}
@@ -122,7 +125,7 @@ export function HeaderMegaMenu() {
 
               <HoverCard.Dropdown style={{ overflow: "hidden" }}>
                 <Group justify="space-between" px="md">
-                  <Text fw={500}>Features</Text>
+                  <Text fw={500}>Categorias</Text>
                   <Anchor href="#" fz="xs">
                     View all
                   </Anchor>
@@ -150,15 +153,22 @@ export function HeaderMegaMenu() {
               </HoverCard.Dropdown>
             </HoverCard>
             <Link to="#" className={classes.link}>
-              Learn
+              Eletrônicos
             </Link>
             <Link to="#" className={classes.link}>
-              Academy
+              Livros
             </Link>
           </Group>
           <Group visibleFrom="sm">
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <IconShoppingCart
+                style={{ width: rem(30), height: rem(30) }}
+                stroke={1.5}
+                color="var(--mantine-color-blue-filled)"
+              />
+              <p style={{ margin: 0, marginLeft: "0.3rem" }}>Carrinho</p>
+            </div>
             <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
           </Group>
           <Burger
             opened={drawerOpened}
@@ -181,12 +191,12 @@ export function HeaderMegaMenu() {
           <Divider my="sm" />
 
           <a href="#" className={classes.link}>
-            Home
+            Início
           </a>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={5}>
-                Features
+                Categorias
               </Box>
               <IconChevronDown
                 style={{ width: rem(16), height: rem(16) }}
@@ -196,10 +206,10 @@ export function HeaderMegaMenu() {
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
           <a href="#" className={classes.link}>
-            Learn
+            Eletrônicos
           </a>
           <a href="#" className={classes.link}>
-            Academy
+            Livros
           </a>
 
           <Divider my="sm" />

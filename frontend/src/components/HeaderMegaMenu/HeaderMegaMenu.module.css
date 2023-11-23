@@ -55,3 +55,13 @@
   border-top: rem(1px) solid
     light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
 }
+
+strong a {
+  text-decoration: none;
+}
+
+strong a:visited,
+strong a:focus,
+strong a:active {
+  color: inherit;
+}

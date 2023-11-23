@@ -1,13 +1,13 @@
-import { HeaderMegaMenu } from "../components/HeaderMegaMenu/HeaderMegaMenu";
-import { FooterSocial } from "../components/FooterSocial/FooterSocial";
-import { Main } from "../components/Container/Container";
+import React from "react";
+import Layout from "../components/Layout";
+import { HomeScreen } from "../screens/HomeScreen/HomeScreen";
 
-export function HomePage() {
+const HomePage = () => {
   return (
-    <>
-      <HeaderMegaMenu />
-      <Main />
-      <FooterSocial />
-    </>
+    <Layout>
+      <HomeScreen />
+    </Layout>
   );
-}
+};
+
+export default HomePage;
