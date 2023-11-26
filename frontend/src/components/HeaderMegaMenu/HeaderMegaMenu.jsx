@@ -99,7 +99,7 @@ export function HeaderMegaMenu() {
             <Link to="/">GoShop</Link>
           </strong>
           <Group h="100%" gap={0} visibleFrom="sm">
-            <Link to="#" className={classes.link}>
+            <Link to="/" className={classes.link}>
               Início
             </Link>
             <HoverCard

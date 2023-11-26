@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import products from "../../products";
 import {
   Container,
   Grid,
@@ -13,12 +12,26 @@ import {
   Paper,
 } from "@mantine/core";
 import classes from "./ProductScreen.module.css";
+import axios from "axios";
 
 const PRIMARY_COL_HEIGHT = rem(300);
 
 const ProductScreen = () => {
+  const [product, setProduct] = useState({});
+
   const { id: productId } = useParams();
-  const product = products.find((p) => p._id === productId);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/v1/products/${productId}`
+      );
+      setProduct(data);
+    };
+
+    fetchProduct();
+  }, [productId]);
+
   const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - var(--mantine-spacing-md) / 2)`;
 
   return (
@@ -60,7 +73,7 @@ const ProductScreen = () => {
             <p className={classes.productName}>{product.description}</p>
           </Grid.Col>
         </Grid>
-        <Paper shadow="lg" withBorder p="xl">
+        <Paper shadow="lg" withBorder p="xl" style={{ maxHeight: 250 }}>
           <Grid gutter="md">
             <Grid.Col>
               <p>{`Price: $${product.price}`}</p>

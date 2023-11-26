@@ -1,4 +1,4 @@
-package main
+package utility
 
 import (
 	"encoding/json"
@@ -11,9 +11,9 @@ import (
 	"strings"
 )
 
-type envelope map[string]interface{}
+type Envelope map[string]interface{}
 
-func (app *application) readIDParam(r *http.Request) (int64, error) {
+func ReadIDParam(r *http.Request) (int64, error) {
 	idStr := chi.URLParam(r, "id")
 
 	id, err := strconv.ParseInt(idStr, 10, 64)
@@ -24,7 +24,7 @@ func (app *application) readIDParam(r *http.Request) (int64, error) {
 	return id, nil
 }
 
-func (app *application) writeJSON(w http.ResponseWriter, status int, data interface{},
+func WriteJSON(w http.ResponseWriter, status int, data interface{},
 	headers http.Header) error {
 	js, err := json.Marshal(data)
 	if err != nil {
@@ -44,7 +44,7 @@ func (app *application) writeJSON(w http.ResponseWriter, status int, data interf
 	return nil
 }
 
-func (app *application) readJSON(w http.ResponseWriter, r *http.Request, dst interface{}) error {
+func ReadJSON(w http.ResponseWriter, r *http.Request, dst interface{}) error {
 
 	maxBytes := 1_048_576
 	r.Body = http.MaxBytesReader(w, r.Body, int64(maxBytes))

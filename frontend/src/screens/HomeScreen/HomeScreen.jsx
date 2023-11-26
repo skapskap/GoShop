@@ -9,8 +9,9 @@ import {
   Rating,
 } from "@mantine/core";
 import classes from "./HomeScreen.module.css";
-import products from "../../products";
 import { Link } from "react-router-dom/dist";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const ProductCard = ({ product }) => {
   return (
@@ -50,11 +51,24 @@ const ProductCard = ({ product }) => {
 };
 
 export function HomeScreen() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/v1/products`
+      );
+      setProducts(data.product);
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <>
       <h1>Últimos Produtos</h1>
       <Group>
-        {products.map((product) => (
+        {products?.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
       </Group>

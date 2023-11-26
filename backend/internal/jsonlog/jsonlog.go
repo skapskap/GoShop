@@ -2,6 +2,7 @@ package jsonlog
 
 import (
 	"encoding/json"
+	"errors"
 	"io"
 	"os"
 	"runtime/debug"
@@ -10,6 +11,8 @@ import (
 )
 
 type Level int8
+
+var ErrRecordNotFound = errors.New("registro não encontrado")
 
 const (
 	LevelInfo  Level = iota // Has the value 0.
