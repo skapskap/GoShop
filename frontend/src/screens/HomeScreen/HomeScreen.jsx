@@ -23,7 +23,7 @@ const ProductCard = ({ product }) => {
       <Group justify="space-between" mt="md">
         <div>
           <p className={classes.textContainer}>
-            <Link to={`/product/${product._id}`}>{product.name}</Link>
+            <Link to={`/product/${product.id}`}>{product.name}</Link>
           </p>
         </div>
       </Group>
@@ -69,7 +69,7 @@ export function HomeScreen() {
       <h1>Últimos Produtos</h1>
       <Group>
         {products?.map((product) => (
-          <ProductCard key={product._id} product={product} />
+          <ProductCard key={product.id} product={product} />
         ))}
       </Group>
     </>

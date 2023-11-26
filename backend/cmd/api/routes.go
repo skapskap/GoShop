@@ -36,6 +36,9 @@ func (app *application) routes() http.Handler {
 	v1.Get("/products", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		handlers.GetAllProducts(w, r, app.db)
 	}))
+	v1.Get("/products/{id}", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		handlers.GetOneProduct(w, r, app.db)
+	}))
 
 	return r
 }

@@ -26,7 +26,9 @@ const ProductScreen = () => {
       const { data } = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/v1/products/${productId}`
       );
-      setProduct(data);
+      console.log(data);
+
+      setProduct(data.product);
     };
 
     fetchProduct();
@@ -64,7 +66,7 @@ const ProductScreen = () => {
                 style={{ marginBottom: 4 }}
               />
               <p style={{ margin: 0, marginLeft: "0.3rem" }}>
-                {product.numReviews} reviews
+                {product.num_reviews} reviews
               </p>
             </Flex>
             <Divider my="sm" />
