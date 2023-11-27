@@ -7,11 +7,11 @@ import {
   Center,
   Button,
   Rating,
+  Loader,
 } from "@mantine/core";
 import classes from "./HomeScreen.module.css";
 import { Link } from "react-router-dom/dist";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useGetProductsQuery } from "../../slices/productsApiSlice";
 
 const ProductCard = ({ product }) => {
   return (
@@ -51,27 +51,34 @@ const ProductCard = ({ product }) => {
 };
 
 export function HomeScreen() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/v1/products`
-      );
-      setProducts(data.product);
-    };
-
-    fetchProducts();
-  }, []);
+  const { data: products, isLoading, error } = useGetProductsQuery();
 
   return (
     <>
-      <h1>Últimos Produtos</h1>
-      <Group>
-        {products?.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </Group>
+      {isLoading ? (
+        <Loader
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+          color="blue"
+          size="lg"
+          type="bars"
+        />
+      ) : error ? (
+        <div>{error?.data?.message || error.error} </div>
+      ) : (
+        <>
+          <h1>Últimos Produtos</h1>
+          <Group style={{ paddingBottom: 30 }}>
+            {products.product.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </Group>
+        </>
+      )}
     </>
   );
 }
