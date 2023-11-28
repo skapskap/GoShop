@@ -1,0 +1,12 @@
+.cartScreen {
+  text-align: left;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.Paper {
+  margin-top: 40px;
+  @media (max-width: $mantine-breakpoint-sm) {
+    width: 500px;
+  }
+}

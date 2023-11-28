@@ -72,7 +72,7 @@ export function HomeScreen() {
       ) : (
         <>
           <h1>Últimos Produtos</h1>
-          <Group style={{ paddingBottom: 30 }}>
+          <Group style={{ paddingBottom: 30, paddingRight: 25 }}>
             {products.product.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

@@ -16,6 +16,7 @@ import {
   ScrollArea,
   rem,
   useMantineTheme,
+  Badge,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -30,6 +31,7 @@ import {
 import classes from "./HeaderMegaMenu.module.css";
 import { Link } from "react-router-dom/dist";
 import { IconShoppingCart } from "@tabler/icons-react";
+import { useSelector } from "react-redux";
 
 const mockdata = [
   {
@@ -65,6 +67,8 @@ const mockdata = [
 ];
 
 export function HeaderMegaMenu() {
+  const { cartItems } = useSelector((state) => state.cart);
+
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
@@ -94,11 +98,13 @@ export function HeaderMegaMenu() {
   return (
     <Box pb={20}>
       <header className={classes.header}>
-        <Group justify="space-between" h="100%">
-          <strong>
-            <Link to="/">GoShop</Link>
-          </strong>
-          <Group h="100%" gap={0} visibleFrom="sm">
+        <Group className={classes.groupHeader}>
+          <Group justify="start">
+            <strong>
+              <Link to="/">GoShop</Link>
+            </strong>
+          </Group>
+          <Group h="100%" gap={0} visibleFrom="sm" justify="end">
             <Link to="/" className={classes.link}>
               Início
             </Link>
@@ -159,22 +165,52 @@ export function HeaderMegaMenu() {
               Livros
             </Link>
           </Group>
-          <Group visibleFrom="sm">
-            <div style={{ display: "flex", alignItems: "center" }}>
+          <Group visibleFrom="md">
+            <Link to="/cart">
               <IconShoppingCart
                 style={{ width: rem(30), height: rem(30) }}
                 stroke={1.5}
                 color="var(--mantine-color-blue-filled)"
               />
-              <p style={{ margin: 0, marginLeft: "0.3rem" }}>Carrinho</p>
-            </div>
+            </Link>
+            {cartItems.length > 0 && (
+              <Badge
+                variant="outline"
+                color="blue"
+                size="sm"
+                radius="md"
+                style={{ marginLeft: -15 }}
+              >
+                {cartItems.reduce((a, c) => a + c.quantity, 0)}
+              </Badge>
+            )}
             <Button variant="default">Log in</Button>
           </Group>
-          <Burger
-            opened={drawerOpened}
-            onClick={toggleDrawer}
-            hiddenFrom="sm"
-          />
+          <Group hiddenFrom="sm">
+            <Link to="/cart">
+              <IconShoppingCart
+                style={{ width: rem(30), height: rem(30) }}
+                stroke={1.5}
+                color="var(--mantine-color-blue-filled)"
+              />
+            </Link>
+            {cartItems.length > 0 && (
+              <Badge
+                variant="outline"
+                color="blue"
+                size="sm"
+                radius="md"
+                style={{ marginLeft: -15 }}
+              >
+                {cartItems.reduce((a, c) => a + c.quantity, 0)}
+              </Badge>
+            )}
+            <Burger
+              opened={drawerOpened}
+              onClick={toggleDrawer}
+              hiddenFrom="sm"
+            />
+          </Group>
         </Group>
       </header>
 
